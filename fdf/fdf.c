@@ -56,7 +56,18 @@ int 	main(void)
 	ptr->img_ptr = mlx_new_image(ptr->mlx_ptr, ptr->side_x, ptr->side_y);
 	ptr->arr = (int *) mlx_get_data_addr(ptr->img_ptr, &bit_per_pixel, &size_line, &endian);
 	//mlx_hook(win_ptr, 2, 0, key_press, ptr); //press key
-	draw_line(10, 10, 400, 40, ptr);
+	draw_line(200, 100, 300, 100, ptr);
+	draw_line(300, 100, 300, 300, ptr);
+	draw_line(200, 100, 200, 300, ptr);
+	draw_line(200, 175, 300, 175, ptr);
+	draw_line(200, 100, 300, 100, ptr);
+	draw_line(150, 300, 350, 300, ptr);
+	draw_line(150, 375, 350, 375, ptr);
+	draw_line(150, 300, 150, 375, ptr);
+	draw_line(350, 300, 350, 375, ptr);
+	draw_line(250, 300, 250, 375, ptr);
+	draw_line(250, 100, 250, 130, ptr);
+	mlx_put_image_to_window(ptr->mlx_ptr, ptr->win_ptr, ptr->img_ptr, 0, 0);
 	mlx_loop(mlx_ptr);
 	return (0);
 }

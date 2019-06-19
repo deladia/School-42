@@ -16,6 +16,6 @@ typedef struct		s_ptr
 	int 			side_y;
 }					t_ptr;
 
-void	draw_line(int x1, int y1, int x2, int y2, t_ptr *ptr);
+t_ptr	*draw_line(int x1, int y1, int x2, int y2, t_ptr *ptr);
 
 #endif
