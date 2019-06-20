@@ -6,7 +6,7 @@
 #    By: vhazelnu <vhazelnu@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/05/16 11:34:51 by vhazelnu          #+#    #+#              #
-#    Updated: 2019/06/18 16:25:01 by deladia          ###   ########.fr        #
+#    Updated: 2019/06/20 18:22:59 by deladia          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,25 +20,30 @@ CFLAGS = -Wall -Wextra -Werror
 
 LIB = /usr/local/lib/ 
 
-INCLUDES = -I /usr/local/include
+MY_LIB = ./libft/
 
-SRC = fdf.c draw_line_x.c
+INCLUDES = -I /usr/local/include -I ./libft/include
+
+SRC = fdf.c draw_line.c read_file.c rotate.c
 
 OBJ = $(SRC:.c=.o)
 
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	$(CC) $(CFLAGS) -L $(LIB) -lmlx $(INCLUDES) -framework OpenGL -framework AppKit -o $@ $^
+	@make -C $(MY_LIB)
+	$(CC) $(CFLAGS) -L $(LIB) -lmlx -L $(MY_LIB) -lft $(INCLUDES) -framework OpenGL -framework AppKit -o $@ $^
 
 %.o: %.c
 	$(CC) $(CFLAGS) -c -o $@ $< $(CFLAGS) $(INCLUDES)
 		
 clean:
+	@make clean -C $(MY_LIB)
 	@/bin/rm -f $(OBJ)
 
 fclean:	clean
 	@make clean
 	@/bin/rm -f $(NAME)
+	@make fclean -C $(MY_LIB)
 	
 re:	fclean all
