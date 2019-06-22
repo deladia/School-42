@@ -7,6 +7,7 @@
 # include <sys/uio.h>
 # include <fcntl.h>
 # include <unistd.h>
+# include <math.h>
 # include "libft/libft.h"
 
 typedef struct		s_ptr
@@ -19,6 +20,7 @@ typedef struct		s_ptr
 	int 			y;
 	int 			side_x;
 	int 			side_y;
+	double			angle;
 }					t_ptr;
 
 typedef struct		s_arr

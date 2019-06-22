@@ -16,18 +16,74 @@ int 	*clear_array(t_ptr *ptr)
 
 int		key_press(int keycode, t_ptr *ptr)
 {
-	if (keycode == 0 && ptr->x > 0)
-		ptr->arr[(--ptr->x) + (ptr->y * ptr->side_x)] = 0xFFFFFF;
-	if (keycode == 1 && (ptr->y < (ptr->side_y - 1)))
-		ptr->arr[ptr->x + (++ptr->y * ptr->side_x)] = 0xFFFFFF;
-	if (keycode == 2 && (ptr->x < (ptr->side_x - 1)))
-		ptr->arr[(++ptr->x) + (ptr->y * ptr->side_x)] = 0xFFFFFF;
-	if (keycode == 13 && ptr->y > 0)
-		ptr->arr[ptr->x + (--ptr->y * ptr->side_x)] = 0xFFFFFF;
+	double	x1;
+	double 	x2;
+	double 	y1;
+	double 	y2;
+	t_coor	*wall1;
+	t_coor	*wall2;
+
+	wall1 = (t_coor *)ft_memalloc(sizeof(t_coor *));
+	wall2 = (t_coor *)ft_memalloc(sizeof(t_coor *));
+
+	wall1->x = 3;
+	wall1->y = 8;
+	wall2->x = 7;
+	wall2->y = 9;
+
+//	if (keycode == 0 && ptr->x > 0)
+//		ptr->arr[(--ptr->x) + (ptr->y * ptr->side_x)] = 0x000000;
+//	if (keycode == 1 && (ptr->y < (ptr->side_y - 1)))
+//		ptr->arr[ptr->x + (++ptr->y * ptr->side_x)] = 0x000000;
+//	if (keycode == 2 && (ptr->x < (ptr->side_x - 1)))
+//		ptr->arr[(++ptr->x) + (ptr->y * ptr->side_x)] = 0x000000;
+//	if (keycode == 13 && ptr->y > 0)
+//		ptr->arr[ptr->x + (--ptr->y * ptr->side_x)] = 0x000000;
+	if (keycode == 0)
+		--ptr->x;
+	if (keycode == 1)
+		--ptr->y;
+	if (keycode == 2)
+		++ptr->x;
+	if (keycode == 13)
+		++ptr->y;
+	if (keycode == 12)
+		ptr->angle += 0.03;
+	if (keycode == 14)
+		ptr->angle -= 0.03;
+//
+//	x1 = wall1->x - ptr->x;
+//	y1 = wall1->y - ptr->y;
+//	x2 = wall2->x - ptr->x;
+//	y2 = wall2->y - ptr->y;
+
+	x1 = (wall1->x - ptr->x) * cos(ptr->angle) - (wall1->y - ptr->y) * sin(ptr->angle);
+	y1 = (wall1->x - ptr->x) * sin(ptr->angle) + (wall1->y - ptr->y) * cos(ptr->angle);
+
+	x2 = (wall2->x - ptr->x) * cos(ptr->angle) - (wall2->y - ptr->y) * sin(ptr->angle);
+	y2 = (wall2->x - ptr->x) * sin(ptr->angle) + (wall2->y - ptr->y) * cos(ptr->angle);
+
+	printf("%f %f %f %f \n", x1, y1, x2, y2);
+
+	x1 = 25 * x1 + 500;   //x1 - ptr->x;
+	y1 = (-25) * y1 + 500;
+	x2 = 25 * x2 + 500;
+	y2 = (-25) * y2 + 500;
+	draw_line((int)x1, (int)y1, (int)x2, (int)y2, ptr);
+	ptr->arr[500 + 500 * ptr->side_x] = 0xFF0000;
 	mlx_put_image_to_window(ptr->mlx_ptr, ptr->win_ptr, ptr->img_ptr, 0, 0);
 	ptr->arr = clear_array(ptr);
 	return (0);
 }
+
+//t_coor	transform(t_coor *coor, t_ptr *ptr)
+//{
+//	int 	xs;
+//	int 	ys;
+//
+//
+//
+//}
 
 int 	main(int argc, char **argv)
 {
@@ -43,10 +99,11 @@ int 	main(int argc, char **argv)
 	if (argc == 2)
 		array = read_file(argv, array);
 	ptr = (t_ptr *)malloc(sizeof(t_ptr));
-	ptr->x = 0;
-	ptr->y = 0;
+	ptr->x = 5;
+	ptr->y = 5;
 	ptr->side_x = 1000;
 	ptr->side_y = 1000;
+	ptr->angle = 0;
 	mlx_ptr = mlx_init();
 	win_ptr = mlx_new_window(mlx_ptr, ptr->side_x, ptr->side_y, "mlx 42");
 	ptr->mlx_ptr = mlx_ptr;
@@ -54,9 +111,9 @@ int 	main(int argc, char **argv)
 	ptr->img_ptr = mlx_new_image(ptr->mlx_ptr, ptr->side_x, ptr->side_y);
 	ptr->arr = (int *) mlx_get_data_addr(ptr->img_ptr, &bit_per_pixel, &size_line, &endian);
 
-	ptr = draw_map(ptr, array);
+//	ptr = draw_map(ptr, array);
 
-	//mlx_hook(win_ptr, 2, 0, key_press, ptr); //press key
+	mlx_hook(win_ptr, 2, 0, key_press, ptr); //press key
 //	draw_line(200, 100, 300, 100, ptr);
 //	draw_line(300, 100, 300, 300, ptr);
 //	draw_line(200, 100, 200, 300, ptr);
@@ -67,9 +124,7 @@ int 	main(int argc, char **argv)
 //	draw_line(150, 300, 150, 375, ptr);
 //	draw_line(350, 300, 350, 375, ptr);
 //	draw_line(250, 300, 250, 375, ptr);
-//	draw_line(250, 100, 250, 130, ptr);
-//	draw_line(0, 0, 499, 100, ptr);
-	mlx_put_image_to_window(ptr->mlx_ptr, ptr->win_ptr, ptr->img_ptr, 200, 200);
+
 	mlx_loop(mlx_ptr);
 	return (0);
 }

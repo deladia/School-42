@@ -96,6 +96,10 @@ t_ptr	*draw_line(int x1, int y1, int x2, int y2, t_ptr *ptr)
 			ft_swap(&x1, &x2);
 			ft_swap(&y1, &y2);
 		}
+
+		dx = x2 - x1;
+		dy = y2 - y1;
+
 		gradient = (double) dy / dx;
 
 		xend = ft_round((double)x1);
@@ -130,22 +134,26 @@ t_ptr	*draw_line(int x1, int y1, int x2, int y2, t_ptr *ptr)
 			ft_swap(&x1, &x2);
 			ft_swap(&y1, &y2);
 		}
+
+		dx = x2 - x1;
+		dy = y2 - y1;
+
 		gradient = (double) dx / dy;
 
-		xend = ft_round((double)x1);
-		yend = (double) y1 + gradient * (xend - x1);
+		yend = ft_round((double)y1);
+		xend = (double) x1 + gradient * (yend - y1);
 		ygap = 1.0 - fpart(y1 + 0.5);
-		xpxl1 = (int) xend;
-		ypxl1 = ipart(yend);
+		xpxl1 = ipart(xend);
+		ypxl1 = (int) yend;
 		plot(xpxl1, ypxl1, (1.0 - fpart(yend)) * ygap, ptr);
 		plot(xpxl1 + 1, ypxl1, fpart(yend) * ygap, ptr);
-		intery = yend + gradient;
+		intery = xend + gradient;
 
-		xend = ft_round((double)x2);
-		yend = y2 + gradient * (xend - x2);
-		ygap = fpart(x2 + 0.5);
-		xpxl2 = (int) xend;
-		ypxl2 = ipart(yend);
+		yend = ft_round((double)y2);
+		xend = x2 + gradient * (yend - y2);
+		ygap = fpart(y2 + 0.5);
+		xpxl2 = ipart(xend);
+		ypxl2 = (int) yend;
 		plot(xpxl2, ypxl2, (1.0 - fpart(yend)) * ygap, ptr);
 		plot(xpxl2 + 1, ypxl2, fpart(yend) * ygap, ptr);
 		i = ypxl1;

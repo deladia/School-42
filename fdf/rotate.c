@@ -1,5 +1,4 @@
 #include "fdf.h"
-#include <math.h>
 
 void	iso(t_coor *coor)
 {
@@ -68,7 +67,7 @@ t_ptr	*draw_map(t_ptr *ptr, t_arr *array)
 				coor4->x = (j - 1) * 30;
 				coor4->y = (i + 1) * 30;
 				coor4->z = array->arr[i][j] * 5;
-
+//
 //				iso(coor1);
 //				iso(coor2);
 //				iso(coor3);
@@ -77,9 +76,9 @@ t_ptr	*draw_map(t_ptr *ptr, t_arr *array)
 				draw_line(coor1->x, coor1->y, coor2->x, coor2->y, ptr);
 				draw_line(coor1->x, coor1->y, coor4->x, coor4->y, ptr);
 			}
-//			coor2->x = j * 30;
-//			coor2->y = i * 30;
-//			coor2->z = array->arr[i][j] * 5;
+			coor2->x = j * 30;
+			coor2->y = i * 30;
+			coor2->z = array->arr[i][j] * 5;
 			j++;
 		}
 		i++;
