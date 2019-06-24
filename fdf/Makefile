@@ -6,7 +6,7 @@
 #    By: vhazelnu <vhazelnu@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/05/16 11:34:51 by vhazelnu          #+#    #+#              #
-#    Updated: 2019/06/20 18:22:59 by deladia          ###   ########.fr        #
+#    Updated: 2019/06/24 17:42:27 by deladia          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,7 @@ MY_LIB = ./libft/
 
 INCLUDES = -I /usr/local/include -I ./libft/include
 
-SRC = fdf.c draw_line.c read_file.c rotate.c
+SRC = fdf.c draw_line.c read_map.c draw_map.c
 
 OBJ = $(SRC:.c=.o)
 

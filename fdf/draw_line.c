@@ -19,13 +19,10 @@ void	plot(int x, int y, double c, t_ptr *ptr)
 	color = 0xFF0000;
 	red = (color & 0xFF0000) >> 16;
 	red *= c;
-
 	green = (color & 0x00FF00) >> 8;
 	green *= c;
-
 	blue = (color & 0x0000FF);
 	blue *= c;
-
 	color = (red << 16) | (green << 8) | blue;
 	ptr->arr[x + y * (ptr->side_x)] = (color);
 }

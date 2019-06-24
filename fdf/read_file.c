@@ -58,6 +58,14 @@ t_arr 	*int_split(char *str, t_arr *array)
 	return(array);
 }
 
+//int 	validation(char *line)
+//{
+//	while (*line != '\0')
+//	{
+//		if (*line != ' ' && *line != '\n');
+//	}
+//}
+
 t_arr 	*read_file(char **argv, t_arr *array)
 {
 	int 	fd;
@@ -83,6 +91,6 @@ t_arr 	*read_file(char **argv, t_arr *array)
 		}
 	}
 	printf("%s\n\n", store);
-	array = int_split(store, array); //надо потестить
+	array = int_split(store, array);
 	return (array);
 }

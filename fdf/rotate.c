@@ -17,12 +17,10 @@ t_ptr	*draw_map(t_ptr *ptr, t_arr *array)
 	int 	j;
 	t_coor	*coor1;
 	t_coor	*coor2;
-	t_coor	*coor3;
 	t_coor	*coor4;
 
 	coor1 = (t_coor *)ft_memalloc(sizeof(t_coor));
 	coor2 = (t_coor *)ft_memalloc(sizeof(t_coor));
-	coor3 = (t_coor *)ft_memalloc(sizeof(t_coor));
 	coor4 = (t_coor *)ft_memalloc(sizeof(t_coor));
 
 	i = 0;
@@ -39,7 +37,7 @@ t_ptr	*draw_map(t_ptr *ptr, t_arr *array)
 				j++;
 				continue;
 			}
-			if (j == array->cnt_col - 1)
+			else if (j == array->cnt_col - 1)
 			{
 				coor1->x = coor2->x;
 				coor1->y = coor2->y;
@@ -53,6 +51,18 @@ t_ptr	*draw_map(t_ptr *ptr, t_arr *array)
 //				iso(coor4);
 
 				draw_line(coor1->x, coor1->y, coor4->x, coor4->y, ptr);
+			}
+			else if (i == array->cnt_row - 1)
+			{
+				coor1->x = coor2->x; //max
+				coor1->y = coor2->y; //0
+				coor1->z = coor2->z;
+
+				coor2->x = j * 30;	// 0
+				coor2->y = i * 30;  // 1
+				coor2->z = array->arr[i][j] * 5;
+
+				draw_line(coor1->x, coor1->y, coor2->x, coor2->y, ptr);
 			}
 			else
 			{
