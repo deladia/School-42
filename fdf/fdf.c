@@ -129,12 +129,8 @@ int		key_press(int keycode, t_ptr *ptr)
 	return (0);
 }
 
-//t_coor	transform(t_coor *coor, t_ptr *ptr)
+//int 	press_key(int keycode, t_ptr *ptr)
 //{
-//	int 	xs;
-//	int 	ys;
-//
-//
 //
 //}
 
@@ -158,8 +154,8 @@ int 	main(int argc, char **argv)
 
 
 	ptr = (t_ptr *)malloc(sizeof(t_ptr));
-	ptr->x = 5;
-	ptr->y = 5;
+	ptr->x = 500;
+	ptr->y = 500;
 	ptr->side_x = 1000;
 	ptr->side_y = 1000;
 	ptr->angle = 0;
@@ -170,11 +166,10 @@ int 	main(int argc, char **argv)
 	ptr->img_ptr = mlx_new_image(ptr->mlx_ptr, ptr->side_x, ptr->side_y);
 	ptr->arr = (int *) mlx_get_data_addr(ptr->img_ptr, &bit_per_pixel, &size_line, &endian);
 
-
 	draw_map(ptr, map);
-//	ptr = draw_map(ptr, array);
+//	mlx_hook(win_ptr, 2, 0, press_key, ptr);
 
-	//mlx_hook(win_ptr, 2, 0, key_press, ptr); //press key
+//	mlx_hook(win_ptr, 2, 0, key_press, ptr); //press key
 //	draw_line(200, 100, 300, 100, ptr);
 //	draw_line(300, 100, 300, 300, ptr);
 //	draw_line(200, 100, 200, 300, ptr);
