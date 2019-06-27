@@ -33,6 +33,17 @@ int		key_press(int keycode, t_ptr *ptr)
 	t_coor	*wall4;
 	t_coor	*draw1;
 	t_coor	*draw2;
+	double	h;
+	double 	w;
+	double x11;
+	double x12;
+	double y11;
+	double y12;
+	double x21;
+	double x22;
+	double y21;
+	double y22;
+
 
 	wall1 = (t_coor *)ft_memalloc(sizeof(t_coor));
 	wall2 = (t_coor *)ft_memalloc(sizeof(t_coor));
@@ -47,11 +58,6 @@ int		key_press(int keycode, t_ptr *ptr)
 	wall2->x = 7;
 	wall2->y = 9;
 
-	wall3->x = 3;
-	wall3->y = 4;
-
-	wall4->x = 7;
-	wall4->y = 5;
 
 //	if (keycode == 0 && ptr->x > 0)
 //		ptr->arr[(--ptr->x) + (ptr->y * ptr->side_x)] = 0x000000;
@@ -74,53 +80,39 @@ int		key_press(int keycode, t_ptr *ptr)
 	if (keycode == 14)
 		ptr->angle -= 0.03;
 
+
+
+
 	x1 = (wall1->x - ptr->x) * cos(ptr->angle) - (wall1->y - ptr->y) * sin(ptr->angle);
 	y1 = (wall1->x - ptr->x) * sin(ptr->angle) + (wall1->y - ptr->y) * cos(ptr->angle);
+
+	h = 500 / y1;
+	w = x1 / y1 * 1000 / 2;
+
+	x11 = w + 1000 / 2;
+	y11 = 1000 / 2 + h / 2;
+
+	x12 = w + 1000 / 2;
+	y12 = 1000 / 2 - h / 2;
+
+	draw_line((int)x11, (int)y11, (int)x12, (int)y12, ptr);
+
 
 	x2 = (wall2->x - ptr->x) * cos(ptr->angle) - (wall2->y - ptr->y) * sin(ptr->angle);
 	y2 = (wall2->x - ptr->x) * sin(ptr->angle) + (wall2->y - ptr->y) * cos(ptr->angle);
 
-	x1 = 25 * x1 + 500;
-	y1 = (-25) * y1 + 500;
-	x2 = 25 * x2  + 500;
-	y2  = (-25) * y2 + 500;
-	draw_line((int)x1, (int)y1, (int)x2, (int)y2, ptr);
-////////////
-	x1 = (wall1->x - ptr->x) * cos(ptr->angle) - (wall1->y - ptr->y) * sin(ptr->angle);
-	y1 = (wall1->x - ptr->x) * sin(ptr->angle) + (wall1->y - ptr->y) * cos(ptr->angle);
+	h = 500 / y2;
+	w = x2 / y2 * 1000 / 2;
 
-	x2 = (wall3->x - ptr->x) * cos(ptr->angle) - (wall3->y - ptr->y) * sin(ptr->angle);
-	y2 = (wall3->x - ptr->x) * sin(ptr->angle) + (wall3->y - ptr->y) * cos(ptr->angle);
+	x21 = w + 1000 / 2;
+	y21 = 1000 / 2 + h / 2;
 
-	x1 = 25 * x1 + 500;
-	y1 = (-25) * y1 + 500;
-	x2 = 25 * x2  + 500;
-	y2  = (-25) * y2 + 500;
-	draw_line((int)x1, (int)y1, (int)x2, (int)y2, ptr);
-//////////////////
-	x1 = (wall4->x - ptr->x) * cos(ptr->angle) - (wall4->y - ptr->y) * sin(ptr->angle);
-	y1 = (wall4->x - ptr->x) * sin(ptr->angle) + (wall4->y - ptr->y) * cos(ptr->angle);
+	x22 = w + 1000 / 2;
+	y22 = 1000 / 2 - h / 2;
 
-	x2 = (wall3->x - ptr->x) * cos(ptr->angle) - (wall3->y - ptr->y) * sin(ptr->angle);
-	y2 = (wall3->x - ptr->x) * sin(ptr->angle) + (wall3->y - ptr->y) * cos(ptr->angle);
-
-	x1 = 25 * x1 + 500;
-	y1 = (-25) * y1 + 500;
-	x2 = 25 * x2  + 500;
-	y2  = (-25) * y2 + 500;
-	draw_line((int)x1, (int)y1, (int)x2, (int)y2, ptr);
-/////////////////////
-	x1 = (wall4->x - ptr->x) * cos(ptr->angle) - (wall4->y - ptr->y) * sin(ptr->angle);
-	y1 = (wall4->x - ptr->x) * sin(ptr->angle) + (wall4->y - ptr->y) * cos(ptr->angle);
-
-	x2 = (wall2->x - ptr->x) * cos(ptr->angle) - (wall2->y - ptr->y) * sin(ptr->angle);
-	y2 = (wall2->x - ptr->x) * sin(ptr->angle) + (wall2->y - ptr->y) * cos(ptr->angle);
-
-	x1 = 25 * x1 + 500;
-	y1 = (-25) * y1 + 500;
-	x2 = 25 * x2  + 500;
-	y2  = (-25) * y2 + 500;
-	draw_line((int)x1, (int)y1, (int)x2, (int)y2, ptr);
+	draw_line((int)x21, (int)y21, (int)x22, (int)y22, ptr);
+	draw_line((int)x12, (int)y12, (int)x22, (int)y22, ptr);
+	draw_line((int)x21, (int)y21, (int)x11, (int)y11, ptr);
 
 
 	ptr->arr[500 + 500 * ptr->side_x] = 0xFF0000;
@@ -154,8 +146,8 @@ int 	main(int argc, char **argv)
 
 
 	ptr = (t_ptr *)malloc(sizeof(t_ptr));
-	ptr->x = 500;
-	ptr->y = 500;
+	ptr->x = 5;
+	ptr->y = 5;
 	ptr->side_x = 1000;
 	ptr->side_y = 1000;
 	ptr->angle = 0;
@@ -166,10 +158,10 @@ int 	main(int argc, char **argv)
 	ptr->img_ptr = mlx_new_image(ptr->mlx_ptr, ptr->side_x, ptr->side_y);
 	ptr->arr = (int *) mlx_get_data_addr(ptr->img_ptr, &bit_per_pixel, &size_line, &endian);
 
-	draw_map(ptr, map);
+//	draw_map(ptr, map);
 //	mlx_hook(win_ptr, 2, 0, press_key, ptr);
 
-//	mlx_hook(win_ptr, 2, 0, key_press, ptr); //press key
+	mlx_hook(win_ptr, 2, 0, key_press, ptr); //press key
 //	draw_line(200, 100, 300, 100, ptr);
 //	draw_line(300, 100, 300, 300, ptr);
 //	draw_line(200, 100, 200, 300, ptr);
@@ -185,3 +177,6 @@ int 	main(int argc, char **argv)
 	mlx_loop(mlx_ptr);
 	return (0);
 }
+
+// сделать дефайн чтобы не такскать структуру
+//& and && первое сначала проверяет все, а второе при первом фолсе дропается

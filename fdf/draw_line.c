@@ -24,7 +24,8 @@ void	plot(int x, int y, double c, t_ptr *ptr)
 	blue = (color & 0x0000FF);
 	blue *= c;
 	color = (red << 16) | (green << 8) | blue;
-	ptr->arr[x + y * (ptr->side_x)] = (color);
+	if (x >= 0 && x < ptr->side_x && y >= 0 && y < ptr->side_y)
+		ptr->arr[x + y * (ptr->side_x)] = (color);
 }
 
 int 	ipart(double x)
@@ -165,3 +166,5 @@ t_ptr	*draw_line(int x1, int y1, int x2, int y2, t_ptr *ptr)
 	return (ptr);
 	//mlx_put_image_to_window(ptr->mlx_ptr, ptr->win_ptr, ptr->img_ptr, 0, 0);
 }
+
+//прикрутить цвет!!!
