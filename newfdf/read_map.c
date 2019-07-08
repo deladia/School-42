@@ -37,7 +37,7 @@ int		create_row(char *line, int y, t_coor **row)
 	(*row)->x = 0;
 	(*row)->y = y;
 	(*row)->z = ft_atoi(line);
-	j = 0;
+	j = 1;
 	while (line[j + 1] >= '0' && line[j + 1] <= '9')
 		j++;
 	if (create_row_2(row, line, j, y) == MEMORY_NOT_ALLOCATE)
@@ -91,25 +91,25 @@ int		read_map(char **argv, t_coor **map)
 	return (OK);
 }
 
-void	print_map(t_coor *map)
-{
-	t_coor	*x;
-	t_coor	*y;
-
-	y = map;
-	while (y)
-	{
-		x = y;
-		while (x)
-		{
-			printf("%2d ", x->z);
-			if (!(x->right))
-				break ;
-			x = x->right;
-		}
-		printf("\n");
-		if (!(y->down))
-			break ;
-		y = y->down;
-	}
-}
+//void	print_map(t_coor *map)
+//{
+//	t_coor	*x;
+//	t_coor	*y;
+//
+//	y = map;
+//	while (y)
+//	{
+//		x = y;
+//		while (x)
+//		{
+//			printf("%2d ", x->z);
+//			if (!(x->right))
+//				break ;
+//			x = x->right;
+//		}
+//		printf("\n");
+//		if (!(y->down))
+//			break ;
+//		y = y->down;
+//	}
+//}

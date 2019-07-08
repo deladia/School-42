@@ -16,7 +16,7 @@ void	plot(int x, int y, double c, t_fdf *ptr)
 	int 	green;
 	int 	blue;
 
-	color = 0xFF0000;
+	color = 0x007FFF;
 	red = (color & 0xFF0000) >> 16;
 	red *= c;
 	green = (color & 0x00FF00) >> 8;

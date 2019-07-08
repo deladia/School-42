@@ -11,7 +11,7 @@
 # include "libft/libft.h"
 # define MEMORY_NOT_ALLOCATE 1
 # define OK 0
-# define SIDE_X 1000
+# define SIDE_X 1500
 # define SIDE_Y 1000
 
 typedef struct		s_coor
@@ -33,16 +33,27 @@ typedef struct		s_fdf
 	int 			x;
 	int 			y;
 	double			angle;
+	double			ygl;
 	int				bit_per_pixel;
 	int				size_line;
 	int				endian;
+	int 			coef;
 	t_coor			*map;
 }					t_fdf;
+
+typedef struct		s_recount
+{
+	double			x1;
+	double			y1;
+	double			x2;
+	double			y2;
+}					t_recount;
 
 t_fdf	*draw_line(int x1, int y1, int x2, int y2, t_fdf *ptr);
 int 	read_map(char **argv, t_coor **map);
 void	print_map(t_coor *map);
 void	draw_map(t_fdf *ptr, t_coor *map);
-void 	rotate_iso(t_coor *map, t_fdf *ptr);
+void 	rotate_iso(t_coor *map);
+void	rotate_z(t_coor *map, t_fdf *fdf);
 
 #endif
