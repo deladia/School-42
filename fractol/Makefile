@@ -6,7 +6,7 @@
 #    By: vhazelnu <vhazelnu@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/05/16 11:34:51 by vhazelnu          #+#    #+#              #
-#    Updated: 2019/07/11 19:47:20 by deladia          ###   ########.fr        #
+#    Updated: 2019/08/13 02:27:20 by deladia          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,7 @@ MY_LIB = ./libft/
 
 INCLUDES = -I /usr/local/include -I ./libft/include
 
-SRC = main.c
+SRC = main.c create_cl.c
 
 OBJ = $(SRC:.c=.o)
 
@@ -32,7 +32,7 @@ all: $(NAME)
 
 $(NAME): $(OBJ)
 	@make -C $(MY_LIB)
-	$(CC) $(CFLAGS) -L $(LIB) -lmlx -L $(MY_LIB) -lft $(INCLUDES) -framework OpenGL -framework AppKit -o $@ $^
+	$(CC) $(CFLAGS) -L $(LIB) -lmlx -L $(MY_LIB) -lft $(INCLUDES) -framework OpenCL  -framework OpenGL -framework AppKit -o $@ $^
 
 %.o: %.c
 	$(CC) $(CFLAGS) -c -o $@ $< $(CFLAGS) $(INCLUDES)
