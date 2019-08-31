@@ -20,39 +20,79 @@ void	fractol_free(t_fractol **fract)
 	free(*fract);
 }
 
-//int		mouse_move(int x, int y, t_fractol *ptr)
-//{
-//	ptr->arr = clear_array(ptr);
-//	if (ptr->flag == 1)
-//	{
-//		ptr->x -= ptr->mouse_x - x;
-//		ptr->y -= (ptr->mouse_y - y);
-//		ptr->mouse_x = x;
-//		ptr->mouse_y = y;
-//	}
-//	draw_map(ptr, ptr->map);
-//	return (OK);
-//}
+int		mouse_move(int x, int y, t_fractol *fract)
+{
+	fract->arr = clear_array(fract);
+	if (fract->flag == 1)
+	{
+		fract->x -= fract->mouse_x - x;
+		fract->y -= (fract->mouse_y - y);
+		fract->mouse_x = x;
+		fract->mouse_y = y;
+	}
+	set_arg(fract, fract->cl);
+	mlx_put_image_to_window(fract->mlx_ptr, fract->win_ptr, fract->img_ptr, 0, 0);
+	return (OK);
+}
+
+void	podkradivauc(t_fractol *fract, int x, int y)
+{
+	if (x > fract->x)
+		while (x != fract->x)
+			fract->x += 1;
+	if (x < fract->x)
+		while (x != fract->x)
+			fract->x -= 1;
+	if (y > fract->y)
+		while (y != fract->y)
+			fract->y += 1;
+	if (y < fract->y)
+		while (y != fract->y)
+			fract->y -= 1;
+}
 
 int		mouse_press(int button, int x, int y, t_fractol *fract)
 {
+	double		xmin;
+	double 		xmax;
+	double 		ymax;
+	double 		ymin;
+	double 		y1;
+	double 		x1;
+
 	fract->arr = clear_array(fract);
-	if (button == 4)
+	xmin = fract->xmin;
+	xmax = fract->xmax;
+	ymin = fract->ymin;
+	ymax = fract->ymax;
+	y1 = SIDE_Y;
+	x1 = SIDE_X;
+//	printf("%f %f\n", x1, y1);
+	if (button == 4 && fract->xmin > - 3.0)
 	{
-		fract->xmin = 0;
-		fract->ymin = 0;
-		fract->xmax = 0;
-		fract->ymax = 0;
-		printf("xmin=%f | xmax=%f | ymin=%f | ymax=%f\n", fract->xmin, fract->xmax, fract->ymin, fract->ymax);
+		fract->xmin = xmin + xmin * (xmax - xmin) / SIDE_X * 100;
+		fract->ymin = ymin + ymin * (ymax - ymin) / SIDE_Y * 100;
+		fract->xmax = xmax + xmax * (xmax - xmin) / SIDE_X * 100;
+		fract->ymax = ymax + ymax * (ymax - ymin) / SIDE_Y * 100;
+		fract->x -= (x1 - x) / SIDE_X * 100;
+		fract->y -= (y1 - y) / SIDE_Y * 100;
 	}
-	if (button == 5 && fract->xmin != 0)
+	if (button == 5)
 	{
-		fract->xmin = 0;
-		fract->ymin = 0;
-		fract->xmax = 0;
-		fract->ymax = 0;
-		printf("xmin=%f | xmax=%f | ymin=%f | ymax=%f\n", fract->xmin, fract->xmax, fract->ymin, fract->ymax);
+		fract->xmin = xmin - xmin * (xmax - xmin) / SIDE_X * 100;
+		fract->ymin = ymin - ymin * (ymax - ymin) / SIDE_Y * 100;
+		fract->xmax = xmax - xmax * (xmax - xmin) / SIDE_X * 100;
+		fract->ymax = ymax - ymax * (ymax - ymin) / SIDE_Y * 100;
+		fract->x += (x1 - x) / SIDE_X * 100;
+		fract->y += (y1 - y) / SIDE_Y * 100;
 	}
+	if (button == 1)
+	{
+		fract->flag *= -1;
+		fract->mouse_x = x;
+		fract->mouse_y = y;
+	}
+	printf("xmin=%f | xmax=%f | ymin=%f | ymax=%f\n", fract->xmin, fract->xmax, fract->ymin, fract->ymax);
 	set_arg(fract, fract->cl);
 	mlx_put_image_to_window(fract->mlx_ptr, fract->win_ptr, fract->img_ptr, 0, 0);
 	return (OK);
@@ -90,17 +130,18 @@ int		key_press(int keycode, t_fractol *fract)
 		exit(OK);
 	}
 	if (keycode == 0)
-		fract->x -= 10;
+		fract->x -= 15;
 	if (keycode == 1)
-		fract->y += 10;
+		fract->y += 15;
 	if (keycode == 2)
-		fract->x += 10;
+		fract->x += 15;
 	if (keycode == 13)
-		fract->y -= 10;
+		fract->y -= 15;
 	if (keycode == 69)
 		fract->repeat += 1;
 	if (keycode == 78 && fract->repeat > 1)
 		fract->repeat -= 1;
+//	printf("%d\n", fract->repeat);
 	key_press_1(keycode, fract);
 	set_arg(fract, fract->cl);
 	mlx_put_image_to_window(fract->mlx_ptr, fract->win_ptr, fract->img_ptr, 0, 0);
@@ -124,8 +165,8 @@ void	control(t_fractol *fract)
 	create_cl(fract);
 	mlx_put_image_to_window(fract->mlx_ptr, fract->win_ptr, fract->img_ptr, 0, 0);
 	mlx_hook(fract->win_ptr, 2, 0, key_press, fract);
-//	mlx_hook(fract->win_ptr, 4, 0, mouse_press, fract);
-//	mlx_hook(fract->win_ptr, 6, 0, mouse_move, fract);
+	mlx_hook(fract->win_ptr, 4, 0, mouse_press, fract);
+	mlx_hook(fract->win_ptr, 6, 0, mouse_move, fract);
 	mlx_hook(fract->win_ptr, 17, 0, close, 0);
 	mlx_loop(fract->mlx_ptr);
 }
@@ -152,12 +193,13 @@ int		main(void)
 		return (MEM_NOT_ALLOCATE);
 	fract->key = 'M';
 	fract->repeat = 30;
-	fract->x = 0;
-	fract->y = 0;
+	fract->x = 750;
+	fract->y = 500;
 	fract->color = 0;
+	fract->flag = -1;
 	fd = open("../kernel.cl", O_RDONLY);
-	fract->program_size = 1300;
-	if (!(fract->program_source = (char *)malloc(1300)))
+	fract->program_size = 1500;
+	if (!(fract->program_source = (char *)ft_memalloc(1500)))
 		return (MEM_NOT_ALLOCATE);
 	if (!(fract->cl = (t_cl *)ft_memalloc(sizeof(t_cl))))
 		return (MEM_NOT_ALLOCATE);

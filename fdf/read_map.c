@@ -1,4 +1,26 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   read_map.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: deladia <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/07/10 17:06:25 by deladia           #+#    #+#             */
+/*   Updated: 2019/07/10 17:06:28 by deladia          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "fdf.h"
+
+int		skip(char *line, int j)
+{
+	if (line[j] == ',')
+	{
+		while (line[j] != ' ' && line[j] != '\0')
+			j++;
+	}
+	return (j);
+}
 
 int		create_row_2(t_coor **row, char *line, int j, int y)
 {
@@ -9,6 +31,9 @@ int		create_row_2(t_coor **row, char *line, int j, int y)
 	i = 0;
 	while (line[j] != '\0')
 	{
+		j = skip(line, j);
+		if (line[j] == '\0')
+			return (OK);
 		if ((line[j] >= '0' && line[j] <= '9') || line[j] == '-')
 		{
 			i++;
@@ -36,7 +61,7 @@ int		create_row(char *line, int y, t_coor **row)
 	(*row)->y = y;
 	(*row)->z = ft_atoi(line);
 	j = 0;
-	while (line[j + 1] >= '0' && line[j + 1] <= '9')
+	while (line[j] != ' ' && line[j] != '\0')
 		j++;
 	if (create_row_2(row, line, j, y) == MEMORY_NOT_ALLOCATE)
 		return (MEMORY_NOT_ALLOCATE);
@@ -69,8 +94,9 @@ int		read_map(char **argv, t_coor **map)
 
 	y = 0;
 	row = NULL;
-	fd = open(argv[1], O_RDONLY);
-	while (get_next_line(fd, &line))
+	if ((fd = open(argv[1], O_RDONLY)) == -1)
+		return (CANT_OPEN_FILE);
+	while (get_next_line(fd, &line) > 0)
 	{
 		if (row == NULL)
 		{
@@ -83,31 +109,7 @@ int		read_map(char **argv, t_coor **map)
 			connect_link(map, &row);
 		}
 		free(line);
-		line = NULL;
 		y++;
 	}
 	return (OK);
-}
-
-void	print_map(t_coor *map)
-{
-	t_coor	*x;
-	t_coor	*y;
-
-	y = map;
-	while (y)
-	{
-		x = y;
-		while (x)
-		{
-			printf("%2d ", x->z);
-			if (!(x->right))
-				break ;
-			x = x->right;
-		}
-		printf("\n");
-		if (!(y->down))
-			break ;
-		y = y->down;
-	}
 }

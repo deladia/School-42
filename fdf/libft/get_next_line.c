@@ -6,7 +6,7 @@
 /*   By: deladia <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/26 12:36:57 by deladia           #+#    #+#             */
-/*   Updated: 2019/05/08 20:32:22 by deladia          ###   ########.fr       */
+/*   Updated: 2019/07/11 19:31:52 by deladia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,10 @@ int			get_next_line(const int fd, char **line)
 		return (-1);
 	if (file[fd])
 		if (ft_check(&file[fd], line) == 1)
+		{
+			free(buf);
 			return (1);
+		}
 	ret = ft_read(fd, buf, &file[fd], line);
 	free(buf);
 	if (ret != 0 || file[fd] == NULL || file[fd][0] == '\0')

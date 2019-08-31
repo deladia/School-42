@@ -43,8 +43,8 @@ typedef struct			s_fractol
 	void				*img_ptr;
 	int					color;
 	int					*arr;
-	int					x;
-	int					y;
+	double				x;
+	double				y;
 	double				xmin;
 	double				xmax;
 	double				ymin;
@@ -57,6 +57,9 @@ typedef struct			s_fractol
 	int 				repeat;
 	size_t 				program_size;
 	t_cl				*cl;
+	int 				flag;
+	int 				mouse_x;
+	int 				mouse_y;
 }						t_fractol;
 
 

@@ -75,8 +75,8 @@ int 	set_arg(t_fractol *fract, t_cl *cl)
 	ret = clSetKernelArg(cl->kernel, 0, sizeof(cl_mem), &cl->memobjs);
 	ret |= clSetKernelArg(cl->kernel, 1, sizeof(int), &side_x);
 	ret |= clSetKernelArg(cl->kernel, 2, sizeof(int), &side_y);
-	ret |= clSetKernelArg(cl->kernel, 3, sizeof(int), &fract->x);
-	ret |= clSetKernelArg(cl->kernel, 4, sizeof(int), &fract->y);
+	ret |= clSetKernelArg(cl->kernel, 3, sizeof(double), &fract->x);
+	ret |= clSetKernelArg(cl->kernel, 4, sizeof(double), &fract->y);
 	ret |= clSetKernelArg(cl->kernel, 5, sizeof(int), &fract->repeat);
 	ret |= clSetKernelArg(cl->kernel, 6, sizeof(int), &fract->color);
 	ret |= clSetKernelArg(cl->kernel, 7, sizeof(double), &fract->xmin);

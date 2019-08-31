@@ -1,170 +1,118 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   draw_line.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: deladia <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/07/10 18:41:41 by deladia           #+#    #+#             */
+/*   Updated: 2019/08/13 03:13:26 by deladia          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "fdf.h"
 
-void	ft_swap(int *a, int *b)
+int		plot(int x, int y, double c, t_fdf *ptr)
 {
-	int 	tmp;
+	int		color;
+	int		red;
+	int		green;
+	int		blue;
 
-	tmp = *a;
-	*a = *b;
-	*b = tmp;
-}
-
-void	plot(int x, int y, double c, t_ptr *ptr)
-{
-	int 	color;
-	int 	red;
-	int 	green;
-	int 	blue;
-
-	color = 0xFF0000;
+	color = ptr->color;
 	red = (color & 0xFF0000) >> 16;
-	red *= c;
+	red = red * c;
 	green = (color & 0x00FF00) >> 8;
-	green *= c;
+	green = green * c;
 	blue = (color & 0x0000FF);
-	blue *= c;
+	blue = blue * c;
 	color = (red << 16) | (green << 8) | blue;
-	if (x >= 0 && x < ptr->side_x && y >= 0 && y < ptr->side_y)
-		ptr->arr[x + y * (ptr->side_x)] = (color);
+	if (x >= 0 && x < SIDE_X && y >= 0 && y < SIDE_Y)
+		ptr->arr[x + y * (SIDE_X)] = (color);
+	return (OK);
 }
 
-int 	ipart(double x)
+void	os_x(t_rec *r, t_param *p, t_fdf *ptr)
 {
-	return ((int)x);
-}
+	int		i;
 
-int 	ft_round(double x)
-{
-	return (ipart(x + 0.5));
-}
-
-double	fpart(double x)
-{
-	return(x - (int)x);
-}
-
-t_ptr	*draw_line(int x1, int y1, int x2, int y2, t_ptr *ptr)
-{
-	int 	dx;
-	int 	dy;
-	double 	gradient;
-	double 	xend;
-	double	yend;
-	double 	xgap;
-	double	ygap;
-	int 	xpxl1;
-	int 	ypxl1;
-	double 	intery;
-	int 	xpxl2;
-	int 	ypxl2;
-	int 	i;
-
-	dx = (x2 > x1) ? (x2 - x1) : (x1 - x2);
-	dy = (y2 > y1) ? (y2 - y1) : (y1 - y2);
-	if (x1 == x2)
+	ft_swap_fdf(r, p);
+	p->gradient = (double)p->dy / p->dx;
+	p->xend = ft_round((double)r->x1);
+	p->yend = (double)r->y1 + p->gradient * (p->xend - r->x1);
+	p->xgap = 1.0 - fpart(r->x1 + 0.5);
+	p->xpxl1 = (int)p->xend;
+	p->ypxl1 = ipart(p->yend);
+	plot(p->xpxl1, p->ypxl1, (1.0 - fpart(p->yend)) * p->xgap, ptr);
+	plot(p->xpxl1, p->ypxl1 + 1, fpart(p->yend) * p->xgap, ptr);
+	p->intery = p->yend + p->gradient;
+	p->xend = ft_round((double)r->x2);
+	p->yend = r->y2 + p->gradient * (p->xend - r->x2);
+	p->xgap = fpart(r->x2 + 0.5);
+	p->xpxl2 = (int)p->xend;
+	p->ypxl2 = ipart(p->yend);
+	i = p->xpxl1 + plot(p->xpxl2, p->ypxl2, (1.0 - fpart(p->yend)) * p->xgap,
+			ptr) + plot(p->xpxl2, p->ypxl2 + 1, fpart(p->yend) * p->xgap, ptr);
+	while (i <= p->xpxl2 - 1)
 	{
-		if (y2 < y1)
-		{
-			ft_swap(&x1, &x2);
-			ft_swap(&y1, &y2);
-		}
-		while (y1 != y2)
-		{
-			plot(x1, y1, 1, ptr);
-			y1++;
-		}
+		plot(i, ipart(p->intery), 1.0 - fpart(p->intery), ptr);
+		plot(i++, ipart(p->intery) + 1, fpart(p->intery), ptr);
+		p->intery = p->intery + p->gradient;
 	}
-	else if (y1 == y2)
+}
+
+void	os_y(t_rec *r, t_param *p, t_fdf *ptr)
+{
+	int		i;
+
+	ft_swap_fdf(r, p);
+	p->gradient = (double)p->dx / p->dy;
+	p->yend = ft_round((double)r->y1);
+	p->xend = (double)r->x1 + p->gradient * (p->yend - r->y1);
+	p->ygap = 1.0 - fpart(r->y1 + 0.5);
+	p->xpxl1 = ipart(p->xend);
+	p->ypxl1 = (int)p->yend;
+	plot(p->xpxl1, p->ypxl1, (1.0 - fpart(p->yend)) * p->ygap, ptr);
+	plot(p->xpxl1 + 1, p->ypxl1, fpart(p->yend) * p->ygap, ptr);
+	p->intery = p->xend + p->gradient;
+	p->yend = ft_round((double)r->y2);
+	p->xend = r->x2 + p->gradient * (p->yend - r->y2);
+	p->ygap = fpart(r->y2 + 0.5);
+	p->xpxl2 = ipart(p->xend);
+	p->ypxl2 = (int)p->yend;
+	i = p->ypxl1 + plot(p->xpxl2, p->ypxl2, (1.0 - fpart(p->yend)) * p->ygap,
+			ptr) + plot(p->xpxl2 + 1, p->ypxl2, fpart(p->yend) * p->ygap, ptr);
+	while (i <= p->ypxl2 - 1)
 	{
-		if (x2 < x1)
-		{
-			ft_swap(&x1, &x2);
-			ft_swap(&y1, &y2);
-		}
-		while (x1 != x2)
-		{
-			plot(x1, y1, 1, ptr);
-			x1++;
-		}
+		plot(ipart(p->intery), i, 1.0 - fpart(p->intery), ptr);
+		plot(ipart(p->intery) + 1, i++, fpart(p->intery), ptr);
+		p->intery = p->intery + p->gradient;
 	}
-	else if (dy < dx)
+}
+
+t_fdf	*draw_line(t_rec *r, t_fdf *ptr)
+{
+	t_param		*p;
+
+	p = (t_param *)ft_memalloc(sizeof(t_param));
+	p->dx = (r->x2 > r->x1) ? (int)(r->x2 - r->x1) : (int)(r->x1 - r->x2);
+	p->dy = (r->y2 > r->y1) ? (int)(r->y2 - r->y1) : (int)(r->y1 - r->y2);
+	if (r->x1 == r->x2)
 	{
-		if (x2 < x1)
-		{
-			ft_swap(&x1, &x2);
-			ft_swap(&y1, &y2);
-		}
-
-		dx = x2 - x1;
-		dy = y2 - y1;
-
-		gradient = (double) dy / dx;
-
-		xend = ft_round((double)x1);
-		yend = (double) y1 + gradient * (xend - x1);
-		xgap = 1.0 - fpart(x1 + 0.5);
-		xpxl1 = (int) xend;
-		ypxl1 = ipart(yend);
-		plot(xpxl1, ypxl1, (1.0 - fpart(yend)) * xgap, ptr);
-		plot(xpxl1, ypxl1 + 1, fpart(yend) * xgap, ptr);
-		intery = yend + gradient;
-
-		xend = ft_round((double)x2);
-		yend = y2 + gradient * (xend - x2);
-		xgap = fpart(x2 + 0.5);
-		xpxl2 = (int) xend;
-		ypxl2 = ipart(yend);
-		plot(xpxl2, ypxl2, (1.0 - fpart(yend)) * xgap, ptr);
-		plot(xpxl2, ypxl2 + 1, fpart(yend) * xgap, ptr);
-		i = xpxl1;
-		while (i <= xpxl2 - 1)
-		{
-			plot(i, ipart(intery), 1.0 - fpart(intery), ptr);
-			plot(i, ipart(intery) + 1, fpart(intery), ptr);
-			intery = intery + gradient;
-			i++;
-		}
+		ft_swap_fdf(r, p);
+		while (r->y1 != r->y2)
+			plot((int)r->x1, (int)r->y1++, 1, ptr);
 	}
+	else if (r->y1 == r->y2)
+	{
+		ft_swap_fdf(r, p);
+		while (r->x1 != r->x2)
+			plot((int)r->x1++, (int)r->y1, 1, ptr);
+	}
+	else if (p->dy < p->dx)
+		os_x(r, p, ptr);
 	else
-	{
-		if (y2 < y1)
-		{
-			ft_swap(&x1, &x2);
-			ft_swap(&y1, &y2);
-		}
-
-		dx = x2 - x1;
-		dy = y2 - y1;
-
-		gradient = (double) dx / dy;
-
-		yend = ft_round((double)y1);
-		xend = (double) x1 + gradient * (yend - y1);
-		ygap = 1.0 - fpart(y1 + 0.5);
-		xpxl1 = ipart(xend);
-		ypxl1 = (int) yend;
-		plot(xpxl1, ypxl1, (1.0 - fpart(yend)) * ygap, ptr);
-		plot(xpxl1 + 1, ypxl1, fpart(yend) * ygap, ptr);
-		intery = xend + gradient;
-
-		yend = ft_round((double)y2);
-		xend = x2 + gradient * (yend - y2);
-		ygap = fpart(y2 + 0.5);
-		xpxl2 = ipart(xend);
-		ypxl2 = (int) yend;
-		plot(xpxl2, ypxl2, (1.0 - fpart(yend)) * ygap, ptr);
-		plot(xpxl2 + 1, ypxl2, fpart(yend) * ygap, ptr);
-		i = ypxl1;
-		while (i <= ypxl2 - 1)
-		{
-			plot(ipart(intery), i, 1.0 - fpart(intery), ptr);
-			plot(ipart(intery) + 1, i, fpart(intery), ptr);
-			intery = intery + gradient;
-			i++;
-		}
-	}
+		os_y(r, p, ptr);
+	free(p);
 	return (ptr);
-	//mlx_put_image_to_window(ptr->mlx_ptr, ptr->win_ptr, ptr->img_ptr, 0, 0);
 }
-
-//прикрутить цвет!!!
