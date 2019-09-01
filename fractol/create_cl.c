@@ -74,6 +74,7 @@ int		set_arg_1(t_fractol *fract, t_cl *cl)
 			SIDE_X * SIDE_Y * sizeof(cl_int), (cl_int *)fract->arr, 0, NULL,
 			NULL)) != OK)
 		func_error(-12);
+	return (OK);
 }
 
 int		set_arg(t_fractol *fract, t_cl *cl)

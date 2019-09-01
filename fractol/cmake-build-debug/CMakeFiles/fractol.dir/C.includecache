@@ -6,6 +6,10 @@
 
 #IncludeRegexTransform: 
 
+/Users/deladia/CLionProjects/fractol/errors.c
+fractol.h
+/Users/deladia/CLionProjects/fractol/fractol.h
+
 /Users/deladia/CLionProjects/fractol/fractol.h
 mlx.h
 /Users/deladia/CLionProjects/fractol/mlx.h
@@ -27,6 +31,10 @@ math.h
 -
 libft/libft.h
 /Users/deladia/CLionProjects/fractol/libft/libft.h
+
+/Users/deladia/CLionProjects/fractol/helps.c
+fractol.h
+/Users/deladia/CLionProjects/fractol/fractol.h
 
 /Users/deladia/CLionProjects/fractol/libft/get_next_line.h
 stdio.h

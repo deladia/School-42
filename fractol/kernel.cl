@@ -44,7 +44,7 @@ __kernel void vadd( __global int *arr, int side_x, int side_y, double move_x, do
     c.im = ymax + ((double)(dot / 1500) - move_y + side_y / 2) / 1000 * (ymin - ymax);
     z = init_complex(c.re, c.im);
     i = 0;
-    if (key == 'M')
+    if (key == 'A')
     {
         while ((z.re * z.re + z.im * z.im) <= 4.0 && i < repeat)
         {
@@ -52,7 +52,7 @@ __kernel void vadd( __global int *arr, int side_x, int side_y, double move_x, do
     	    i++;
         }
     }
-    if (key == 'J')
+    if (key == 'B')
     {
         k = init_complex((2 * ((double)x / side_x - 0.5)), (2 * ((double)(side_y - y) / side_y - 0.5)));
         while ((z.re * z.re + z.im * z.im) <= 4.0 & i < repeat)
@@ -61,7 +61,7 @@ __kernel void vadd( __global int *arr, int side_x, int side_y, double move_x, do
             i++;
         }
     }
-    if (key == 'B')
+    if (key == 'C')
     {
         while (z.re * z.re + z.im * z.im <= 4.0 & i < repeat)
         {
@@ -77,7 +77,7 @@ __kernel void vadd( __global int *arr, int side_x, int side_y, double move_x, do
             i++;
         }
     }
-    if (key == 'C')
+    if (key == 'E')
     {
         while (z.re * z.re + z.im * z.im <= 4.0 && i < repeat)
         {
@@ -85,7 +85,7 @@ __kernel void vadd( __global int *arr, int side_x, int side_y, double move_x, do
             i++;
         }
     }
-    if (key == 'P')
+    if (key == 'F')
     {
         while (z.re * z.re + z.im * z.im <= 4 && i < repeat)
         {

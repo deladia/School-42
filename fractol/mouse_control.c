@@ -55,6 +55,29 @@ int		mouse_press_1(int button, int x, int y, t_fractol *fract)
 	return (OK);
 }
 
+int		mouse_press_0(int button, int x, int y, t_fractol *fract)
+{
+	double		xmin;
+	double		xmax;
+	double		ymax;
+	double		ymin;
+
+	xmin = fract->xmin;
+	xmax = fract->xmax;
+	ymin = fract->ymin;
+	ymax = fract->ymax;
+	if (button == 5)
+	{
+		fract->xmin = xmin - xmin * (xmax - xmin) / SIDE_X * 100;
+		fract->ymin = ymin - ymin * (ymax - ymin) / SIDE_Y * 100;
+		fract->xmax = xmax - xmax * (xmax - xmin) / SIDE_X * 100;
+		fract->ymax = ymax - ymax * (ymax - ymin) / SIDE_Y * 100;
+		fract->x += (double)(SIDE_X - x) / SIDE_X * 100;
+		fract->y += (double)(SIDE_Y - y) / SIDE_Y * 100;
+	}
+	return (OK);
+}
+
 int		mouse_press(int button, int x, int y, t_fractol *fract)
 {
 	double		xmin;
@@ -76,15 +99,7 @@ int		mouse_press(int button, int x, int y, t_fractol *fract)
 		fract->x -= (double)(SIDE_X - x) / SIDE_X * 100;
 		fract->y -= (double)(SIDE_Y - y) / SIDE_Y * 100;
 	}
-	if (button == 5)
-	{
-		fract->xmin = xmin - xmin * (xmax - xmin) / SIDE_X * 100;
-		fract->ymin = ymin - ymin * (ymax - ymin) / SIDE_Y * 100;
-		fract->xmax = xmax - xmax * (xmax - xmin) / SIDE_X * 100;
-		fract->ymax = ymax - ymax * (ymax - ymin) / SIDE_Y * 100;
-		fract->x += (double)(SIDE_X - x) / SIDE_X * 100;
-		fract->y += (double)(SIDE_Y - y) / SIDE_Y * 100;
-	}
+	mouse_press_0(button, x, y, fract);
 	mouse_press_1(button, x, y, fract);
 	return (OK);
 }

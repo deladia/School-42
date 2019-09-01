@@ -12,6 +12,15 @@
 
 #include "fractol.h"
 
+int		next_fractol(t_fractol *fract)
+{
+	if (fract->key1 != 'F')
+		fract->key1++;
+	else
+		fract->key1 = 'A';
+	return (OK);
+}
+
 int		key_press_1(int keycode, t_fractol *fract)
 {
 	if (keycode == 18)
@@ -25,13 +34,15 @@ int		key_press_1(int keycode, t_fractol *fract)
 	if (keycode == 23)
 		fract->color = 40;
 	if (keycode == 22)
-		fract->color = 65;
+		fract->color = 45;
 	if (keycode == 26)
-		fract->color = 75;
+		fract->color = 65;
 	if (keycode == 28)
-		fract->color = 230;
+		fract->color = 10;
 	if (keycode == 25)
-		fract->color = 251;
+		fract->color = 150;
+	if (keycode == 48)
+		next_fractol(fract);
 	return (OK);
 }
 
@@ -86,7 +97,7 @@ void	control(t_fractol *fract)
 	mlx_loop(fract->mlx_ptr);
 }
 
-int		choose_fractol(t_fractol *fract)
+int		set_fractol(t_fractol *fract)
 {
 	if (fract->key1 == 'C')
 	{
@@ -105,15 +116,48 @@ int		choose_fractol(t_fractol *fract)
 	return (OK);
 }
 
-int		main(void)
+int		read_kernel(t_fractol *fract)
 {
-	t_fractol		*fract;
-	int				fd;
-	int				ret;
+	char	*line;
+	char	*tmp;
+	int		fd;
 
-	if (!(fract = (t_fractol *)ft_memalloc(sizeof(t_fractol))))
+	if (!(fract->program_source = (char *)ft_memalloc(sizeof(char))))
 		return (MEM_NOT_ALLOCATE);
-	fract->key1 = 'J';
+	if ((fd = open("./kernel.cl", O_RDONLY)) < 0)
+		return (OPEN_ERROR);
+	while ((get_next_line(fd, &line)) > 0)
+	{
+		tmp = fract->program_source;
+		fract->program_source = ft_strjoin(tmp, line);
+		free(tmp);
+		free(line);
+	}
+	fract->program_size = ft_strlen(fract->program_source);
+	return (OK);
+}
+
+int		choose_fractol(char *name, t_fractol *fract)
+{
+	if (ft_strcmp(name, "Mandelbrot") == 0)
+		fract->key1 = 'A';
+	else if (ft_strcmp(name, "Julia") == 0)
+		fract->key1 = 'B';
+	else if (ft_strcmp(name, "Burning Ship") == 0)
+		fract->key1 = 'C';
+	else if (ft_strcmp(name, "Mandelbar") == 0)
+		fract->key1 = 'D';
+	else if (ft_strcmp(name, "Celtic Mandelbar") == 0)
+		fract->key1 = 'E';
+	else if (ft_strcmp(name, "Perpendicular Mandelbrot") == 0)
+		fract->key1 = 'F';
+	else
+		return (WRONG_NAME);
+	return (OK);
+}
+
+int		set_default(t_fractol *fract)
+{
 	fract->repeat = 50;
 	fract->x = 750;
 	fract->y = 500;
@@ -122,17 +166,40 @@ int		main(void)
 	fract->flag2 = -1;
 	fract->mouse_jul_y = 500;
 	fract->mouse_jul_x = 750;
-	fd = open("../kernel.cl", O_RDONLY);
-	//add read gnl
-	fract->program_size = 3800;
-	if (!(fract->program_source = (char *)ft_memalloc(3800)))
-		return (MEM_NOT_ALLOCATE);
-	if (!(fract->cl = (t_cl *)ft_memalloc(sizeof(t_cl))))
-		return (MEM_NOT_ALLOCATE);
-	if ((ret = read(fd, fract->program_source, fract->program_size)) < 0)
-		return (READ_ERROR);
-	choose_fractol(fract);
-	control(fract);
-	close(fd);
+	return (OK);
+}
+
+void	print(void)
+{
+	ft_putstr("\n\033[031mWrong argument\n\n\033[033mChoose one of:\n"
+	"  \033[032m'Mandelbrot'\n  'Julia'\n"
+	"  'Burning Ship'\n  'Mandelbar'\n  'Celtic Mandelbar'\n"
+"  'Perpendicular Mandelbrot'\n");
+}
+
+int		main(int argc, char **argv)
+{
+	t_fractol		*fract;
+
+	if (argc == 2)
+	{
+		if (!(fract = (t_fractol *)ft_memalloc(sizeof(t_fractol))))
+			return (MEM_NOT_ALLOCATE);
+		set_default(fract);
+		if (choose_fractol(argv[1], fract) != OK)
+		{
+			print();
+			free(fract);
+			return (WRONG_NAME);
+		}
+		if (!(fract->cl = (t_cl *)ft_memalloc(sizeof(t_cl))))
+			return (MEM_NOT_ALLOCATE);
+		if (read_kernel(fract) != OK)
+			return (READ_ERROR);
+		set_fractol(fract);
+		control(fract);
+	}
+	else
+		print();
 	return (OK);
 }

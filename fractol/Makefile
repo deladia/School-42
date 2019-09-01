@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: vhazelnu <vhazelnu@student.42.fr>          +#+  +:+       +#+         #
+#    By: deladia <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2019/05/16 11:34:51 by vhazelnu          #+#    #+#              #
-#    Updated: 2019/09/01 19:55:48 by deladia          ###   ########.fr        #
+#    Created: 2019/09/01 23:52:27 by deladia           #+#    #+#              #
+#    Updated: 2019/09/01 23:52:55 by deladia          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,7 @@ MY_LIB = ./libft/
 
 INCLUDES = -I /usr/local/include -I ./libft/include
 
-SRC = main.c create_cl.c
+SRC = main.c create_cl.c mouse_control.c helps.c errors.c
 
 OBJ = $(SRC:.c=.o)
 

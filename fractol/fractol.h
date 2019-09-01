@@ -25,7 +25,9 @@
 # define SIDE_Y 1000
 # define SIDE_X 1500
 # define READ_ERROR 23
+# define OPEN_ERROR 24
 # define MEM_NOT_ALLOCATE 1
+# define WRONG_NAME 25
 # define OK	0
 
 typedef struct			s_cl
