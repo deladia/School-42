@@ -150,6 +150,60 @@ create_cl.c.s:
 	$(MAKE) -f CMakeFiles/fractol.dir/build.make CMakeFiles/fractol.dir/create_cl.c.s
 .PHONY : create_cl.c.s
 
+errors.o: errors.c.o
+
+.PHONY : errors.o
+
+# target to build an object file
+errors.c.o:
+	$(MAKE) -f CMakeFiles/fractol.dir/build.make CMakeFiles/fractol.dir/errors.c.o
+.PHONY : errors.c.o
+
+errors.i: errors.c.i
+
+.PHONY : errors.i
+
+# target to preprocess a source file
+errors.c.i:
+	$(MAKE) -f CMakeFiles/fractol.dir/build.make CMakeFiles/fractol.dir/errors.c.i
+.PHONY : errors.c.i
+
+errors.s: errors.c.s
+
+.PHONY : errors.s
+
+# target to generate assembly for a file
+errors.c.s:
+	$(MAKE) -f CMakeFiles/fractol.dir/build.make CMakeFiles/fractol.dir/errors.c.s
+.PHONY : errors.c.s
+
+helps.o: helps.c.o
+
+.PHONY : helps.o
+
+# target to build an object file
+helps.c.o:
+	$(MAKE) -f CMakeFiles/fractol.dir/build.make CMakeFiles/fractol.dir/helps.c.o
+.PHONY : helps.c.o
+
+helps.i: helps.c.i
+
+.PHONY : helps.i
+
+# target to preprocess a source file
+helps.c.i:
+	$(MAKE) -f CMakeFiles/fractol.dir/build.make CMakeFiles/fractol.dir/helps.c.i
+.PHONY : helps.c.i
+
+helps.s: helps.c.s
+
+.PHONY : helps.s
+
+# target to generate assembly for a file
+helps.c.s:
+	$(MAKE) -f CMakeFiles/fractol.dir/build.make CMakeFiles/fractol.dir/helps.c.s
+.PHONY : helps.c.s
+
 libft/ft_atoi.o: libft/ft_atoi.c.o
 
 .PHONY : libft/ft_atoi.o
@@ -1932,6 +1986,33 @@ main.c.s:
 	$(MAKE) -f CMakeFiles/fractol.dir/build.make CMakeFiles/fractol.dir/main.c.s
 .PHONY : main.c.s
 
+mouse_control.o: mouse_control.c.o
+
+.PHONY : mouse_control.o
+
+# target to build an object file
+mouse_control.c.o:
+	$(MAKE) -f CMakeFiles/fractol.dir/build.make CMakeFiles/fractol.dir/mouse_control.c.o
+.PHONY : mouse_control.c.o
+
+mouse_control.i: mouse_control.c.i
+
+.PHONY : mouse_control.i
+
+# target to preprocess a source file
+mouse_control.c.i:
+	$(MAKE) -f CMakeFiles/fractol.dir/build.make CMakeFiles/fractol.dir/mouse_control.c.i
+.PHONY : mouse_control.c.i
+
+mouse_control.s: mouse_control.c.s
+
+.PHONY : mouse_control.s
+
+# target to generate assembly for a file
+mouse_control.c.s:
+	$(MAKE) -f CMakeFiles/fractol.dir/build.make CMakeFiles/fractol.dir/mouse_control.c.s
+.PHONY : mouse_control.c.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -1944,6 +2025,12 @@ help:
 	@echo "... create_cl.o"
 	@echo "... create_cl.i"
 	@echo "... create_cl.s"
+	@echo "... errors.o"
+	@echo "... errors.i"
+	@echo "... errors.s"
+	@echo "... helps.o"
+	@echo "... helps.i"
+	@echo "... helps.s"
 	@echo "... libft/ft_atoi.o"
 	@echo "... libft/ft_atoi.i"
 	@echo "... libft/ft_atoi.s"
@@ -2142,6 +2229,9 @@ help:
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"
+	@echo "... mouse_control.o"
+	@echo "... mouse_control.i"
+	@echo "... mouse_control.s"
 .PHONY : help
 
 

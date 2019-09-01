@@ -66,6 +66,9 @@ file(REMOVE_RECURSE
   "CMakeFiles/fractol.dir/libft/ft_toupper.c.o"
   "CMakeFiles/fractol.dir/libft/get_next_line.c.o"
   "CMakeFiles/fractol.dir/create_cl.c.o"
+  "CMakeFiles/fractol.dir/errors.c.o"
+  "CMakeFiles/fractol.dir/helps.c.o"
+  "CMakeFiles/fractol.dir/mouse_control.c.o"
   "fractol.pdb"
   "fractol"
 )

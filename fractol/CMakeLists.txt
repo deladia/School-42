@@ -30,6 +30,6 @@ find_library(APP_KIT AppKit)
 link_libraries(mlx)
 
 
-add_executable(fractol main.c fractol.h ${LIBFT_SRCS} create_cl.c)
+add_executable(fractol main.c fractol.h ${LIBFT_SRCS} create_cl.c errors.c helps.c mouse_control.c)
 
 target_link_libraries(fractol ${OPEN_GL} ${APP_KIT} ${OPEN_CL})

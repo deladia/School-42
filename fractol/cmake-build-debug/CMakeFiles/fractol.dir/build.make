@@ -928,6 +928,45 @@ CMakeFiles/fractol.dir/create_cl.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/fractol.dir/create_cl.c.s"
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/deladia/CLionProjects/fractol/create_cl.c -o CMakeFiles/fractol.dir/create_cl.c.s
 
+CMakeFiles/fractol.dir/errors.c.o: CMakeFiles/fractol.dir/flags.make
+CMakeFiles/fractol.dir/errors.c.o: ../errors.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/deladia/CLionProjects/fractol/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_68) "Building C object CMakeFiles/fractol.dir/errors.c.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/fractol.dir/errors.c.o   -c /Users/deladia/CLionProjects/fractol/errors.c
+
+CMakeFiles/fractol.dir/errors.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/fractol.dir/errors.c.i"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/deladia/CLionProjects/fractol/errors.c > CMakeFiles/fractol.dir/errors.c.i
+
+CMakeFiles/fractol.dir/errors.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/fractol.dir/errors.c.s"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/deladia/CLionProjects/fractol/errors.c -o CMakeFiles/fractol.dir/errors.c.s
+
+CMakeFiles/fractol.dir/helps.c.o: CMakeFiles/fractol.dir/flags.make
+CMakeFiles/fractol.dir/helps.c.o: ../helps.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/deladia/CLionProjects/fractol/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_69) "Building C object CMakeFiles/fractol.dir/helps.c.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/fractol.dir/helps.c.o   -c /Users/deladia/CLionProjects/fractol/helps.c
+
+CMakeFiles/fractol.dir/helps.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/fractol.dir/helps.c.i"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/deladia/CLionProjects/fractol/helps.c > CMakeFiles/fractol.dir/helps.c.i
+
+CMakeFiles/fractol.dir/helps.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/fractol.dir/helps.c.s"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/deladia/CLionProjects/fractol/helps.c -o CMakeFiles/fractol.dir/helps.c.s
+
+CMakeFiles/fractol.dir/mouse_control.c.o: CMakeFiles/fractol.dir/flags.make
+CMakeFiles/fractol.dir/mouse_control.c.o: ../mouse_control.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/deladia/CLionProjects/fractol/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_70) "Building C object CMakeFiles/fractol.dir/mouse_control.c.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/fractol.dir/mouse_control.c.o   -c /Users/deladia/CLionProjects/fractol/mouse_control.c
+
+CMakeFiles/fractol.dir/mouse_control.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/fractol.dir/mouse_control.c.i"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/deladia/CLionProjects/fractol/mouse_control.c > CMakeFiles/fractol.dir/mouse_control.c.i
+
+CMakeFiles/fractol.dir/mouse_control.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/fractol.dir/mouse_control.c.s"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/deladia/CLionProjects/fractol/mouse_control.c -o CMakeFiles/fractol.dir/mouse_control.c.s
+
 # Object files for target fractol
 fractol_OBJECTS = \
 "CMakeFiles/fractol.dir/main.c.o" \
@@ -996,7 +1035,10 @@ fractol_OBJECTS = \
 "CMakeFiles/fractol.dir/libft/ft_tolower.c.o" \
 "CMakeFiles/fractol.dir/libft/ft_toupper.c.o" \
 "CMakeFiles/fractol.dir/libft/get_next_line.c.o" \
-"CMakeFiles/fractol.dir/create_cl.c.o"
+"CMakeFiles/fractol.dir/create_cl.c.o" \
+"CMakeFiles/fractol.dir/errors.c.o" \
+"CMakeFiles/fractol.dir/helps.c.o" \
+"CMakeFiles/fractol.dir/mouse_control.c.o"
 
 # External object files for target fractol
 fractol_EXTERNAL_OBJECTS =
@@ -1068,9 +1110,12 @@ fractol: CMakeFiles/fractol.dir/libft/ft_tolower.c.o
 fractol: CMakeFiles/fractol.dir/libft/ft_toupper.c.o
 fractol: CMakeFiles/fractol.dir/libft/get_next_line.c.o
 fractol: CMakeFiles/fractol.dir/create_cl.c.o
+fractol: CMakeFiles/fractol.dir/errors.c.o
+fractol: CMakeFiles/fractol.dir/helps.c.o
+fractol: CMakeFiles/fractol.dir/mouse_control.c.o
 fractol: CMakeFiles/fractol.dir/build.make
 fractol: CMakeFiles/fractol.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/Users/deladia/CLionProjects/fractol/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_68) "Linking C executable fractol"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/Users/deladia/CLionProjects/fractol/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_71) "Linking C executable fractol"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/fractol.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

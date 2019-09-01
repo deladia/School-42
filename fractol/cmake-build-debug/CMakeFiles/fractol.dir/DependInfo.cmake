@@ -5,6 +5,8 @@ set(CMAKE_DEPENDS_LANGUAGES
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_C
   "/Users/deladia/CLionProjects/fractol/create_cl.c" "/Users/deladia/CLionProjects/fractol/cmake-build-debug/CMakeFiles/fractol.dir/create_cl.c.o"
+  "/Users/deladia/CLionProjects/fractol/errors.c" "/Users/deladia/CLionProjects/fractol/cmake-build-debug/CMakeFiles/fractol.dir/errors.c.o"
+  "/Users/deladia/CLionProjects/fractol/helps.c" "/Users/deladia/CLionProjects/fractol/cmake-build-debug/CMakeFiles/fractol.dir/helps.c.o"
   "/Users/deladia/CLionProjects/fractol/libft/ft_atoi.c" "/Users/deladia/CLionProjects/fractol/cmake-build-debug/CMakeFiles/fractol.dir/libft/ft_atoi.c.o"
   "/Users/deladia/CLionProjects/fractol/libft/ft_bzero.c" "/Users/deladia/CLionProjects/fractol/cmake-build-debug/CMakeFiles/fractol.dir/libft/ft_bzero.c.o"
   "/Users/deladia/CLionProjects/fractol/libft/ft_is_negative.c" "/Users/deladia/CLionProjects/fractol/cmake-build-debug/CMakeFiles/fractol.dir/libft/ft_is_negative.c.o"
@@ -71,6 +73,7 @@ set(CMAKE_DEPENDS_CHECK_C
   "/Users/deladia/CLionProjects/fractol/libft/ft_toupper.c" "/Users/deladia/CLionProjects/fractol/cmake-build-debug/CMakeFiles/fractol.dir/libft/ft_toupper.c.o"
   "/Users/deladia/CLionProjects/fractol/libft/get_next_line.c" "/Users/deladia/CLionProjects/fractol/cmake-build-debug/CMakeFiles/fractol.dir/libft/get_next_line.c.o"
   "/Users/deladia/CLionProjects/fractol/main.c" "/Users/deladia/CLionProjects/fractol/cmake-build-debug/CMakeFiles/fractol.dir/main.c.o"
+  "/Users/deladia/CLionProjects/fractol/mouse_control.c" "/Users/deladia/CLionProjects/fractol/cmake-build-debug/CMakeFiles/fractol.dir/mouse_control.c.o"
   )
 set(CMAKE_C_COMPILER_ID "AppleClang")
 

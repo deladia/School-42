@@ -87,7 +87,13 @@
 		<Unit filename="/Users/deladia/CLionProjects/fractol/create_cl.c">
 			<Option target="fractol"/>
 		</Unit>
+		<Unit filename="/Users/deladia/CLionProjects/fractol/errors.c">
+			<Option target="fractol"/>
+		</Unit>
 		<Unit filename="/Users/deladia/CLionProjects/fractol/fractol.h">
+			<Option target="fractol"/>
+		</Unit>
+		<Unit filename="/Users/deladia/CLionProjects/fractol/helps.c">
 			<Option target="fractol"/>
 		</Unit>
 		<Unit filename="/Users/deladia/CLionProjects/fractol/libft/ft_atoi.c">
@@ -289,6 +295,9 @@
 			<Option target="fractol"/>
 		</Unit>
 		<Unit filename="/Users/deladia/CLionProjects/fractol/main.c">
+			<Option target="fractol"/>
+		</Unit>
+		<Unit filename="/Users/deladia/CLionProjects/fractol/mouse_control.c">
 			<Option target="fractol"/>
 		</Unit>
 		<Unit filename="/Users/deladia/CLionProjects/fractol/CMakeLists.txt">

@@ -6,13 +6,13 @@
 #    By: vhazelnu <vhazelnu@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/05/16 11:34:51 by vhazelnu          #+#    #+#              #
-#    Updated: 2019/08/13 02:27:20 by deladia          ###   ########.fr        #
+#    Updated: 2019/09/01 19:55:48 by deladia          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 .PHONY: clean fclean re
 
-NAME = fractol
+NAME = fractol 
 
 CC = cc
 
@@ -32,7 +32,7 @@ all: $(NAME)
 
 $(NAME): $(OBJ)
 	@make -C $(MY_LIB)
-	$(CC) $(CFLAGS) -L $(LIB) -lmlx -L $(MY_LIB) -lft $(INCLUDES) -framework OpenCL  -framework OpenGL -framework AppKit -o $@ $^
+	$(CC) $(CFLAGS) -L $(LIB) -lmlx -L $(MY_LIB) -lft $(INCLUDES) -framework OpenGL -framework AppKit -framework OpenCL -o $@ $^
 
 %.o: %.c
 	$(CC) $(CFLAGS) -c -o $@ $< $(CFLAGS) $(INCLUDES)

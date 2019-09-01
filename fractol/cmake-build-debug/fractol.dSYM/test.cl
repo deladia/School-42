@@ -1,0 +1,66 @@
+__kernel void vadd( __global int *arr, int side_x, int side_y, double move_x, double move_y, int repeat, int color, double xmin, double xmax, double ymin, double ymax, char key)
+{
+    double		xc;
+    double 		yc;
+    double 		x;
+    double		y;
+    int 		i;
+    double 		xn1;
+    double		yn1;
+    double 		xn0;
+    double 		yn0;
+    int         dot;
+    double      t;
+    int         red;
+    int         green;
+    int         blue;
+    double      kre;
+    double      kim;
+
+    dot = get_global_id(0);
+    xc = xmin + ((double)(dot % 1500) - move_x + side_x / 2) / 1500 * (xmax - xmin);
+    yc = ymax + ((double)(dot / 1500) - move_y + side_y / 2) / 1000 * (ymin - ymax);
+    xn0 = 0;
+    yn0 = 0;
+    i = 0;
+    if (key == 'M')
+    {
+        while ((xn1 * xn1 + yn1 * yn1) <= 4.0 & i < repeat)
+        {
+    	    xn1 = xn0 * xn0 - yn0 * yn0 + xc;
+           	yn1 = 2.0 * xn0 * yn0 + yc;
+        	xn0 = xn1;
+            yn0 = yn1;
+            i++;
+        }
+    }
+    if (key == 'J')
+    {
+        kre = -0.4;
+        kim = 0.6;
+        while ((xn1 * xn1 + yn1 * yn1) < 4.0 & i < repeat)
+        {
+            xn1 = xn0 * xn0 - yn0 * yn0 + kre;
+            yn1 = 2.0 * xn0 * yn0 + kim;
+            xn0 = xn1;
+            yn0 = yn1;
+            i++;
+        }
+    }
+    if (color == 0 && i != repeat)
+        arr[dot] = 0xFFFFFF;
+    else if (color == 15)
+    {
+        t = (double)i / (double)repeat;
+        red = (int)((color - 6) * (1 - t) * t * t * t * 255);
+        arr[dot] = red;
+    }
+    else
+    {
+        t = (double)i / (double)repeat;
+        red = (int)((color - 6) * (1 - t) * t * t * t * 255);
+        green = (int)((color) * t * t * (1 - t) * (1 - t) * 255);
+        blue = (int)((color - 6.5) * (1 - t) * (1 - t) * (1 - t) * t * 255);
+        arr[dot] = red * green * blue;
+    }
+}
