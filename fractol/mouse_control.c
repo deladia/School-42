@@ -31,7 +31,7 @@ int		mouse_move(int x, int y, t_fractol *fract)
 	}
 	set_arg(fract, fract->cl);
 	mlx_put_image_to_window(fract->mlx_ptr, fract->win_ptr,
-			fract->img_ptr, 0, 0);
+			fract->img_ptr, 200, 0);
 	return (OK);
 }
 
@@ -51,7 +51,7 @@ int		mouse_press_1(int button, int x, int y, t_fractol *fract)
 	}
 	set_arg(fract, fract->cl);
 	mlx_put_image_to_window(fract->mlx_ptr, fract->win_ptr,
-							fract->img_ptr, 0, 0);
+							fract->img_ptr, 200, 0);
 	return (OK);
 }
 
@@ -72,8 +72,8 @@ int		mouse_press_0(int button, int x, int y, t_fractol *fract)
 		fract->ymin = ymin - ymin * (ymax - ymin) / SIDE_Y * 100;
 		fract->xmax = xmax - xmax * (xmax - xmin) / SIDE_X * 100;
 		fract->ymax = ymax - ymax * (ymax - ymin) / SIDE_Y * 100;
-		fract->x += (double)(SIDE_X - x) / SIDE_X * 100;
-		fract->y += (double)(SIDE_Y - y) / SIDE_Y * 100;
+		fract->x += (double)(750.0 - x) / 4;
+		fract->y += (double)(500.0 - y) / 4;
 	}
 	return (OK);
 }
@@ -92,12 +92,12 @@ int		mouse_press(int button, int x, int y, t_fractol *fract)
 	ymax = fract->ymax;
 	if (button == 4 && fract->xmin > -3.0)
 	{
-		fract->xmin = xmin + xmin * (xmax - xmin) / SIDE_X * 100;
-		fract->ymin = ymin + ymin * (ymax - ymin) / SIDE_Y * 100;
-		fract->xmax = xmax + xmax * (xmax - xmin) / SIDE_X * 100;
-		fract->ymax = ymax + ymax * (ymax - ymin) / SIDE_Y * 100;
-		fract->x -= (double)(SIDE_X - x) / SIDE_X * 100;
-		fract->y -= (double)(SIDE_Y - y) / SIDE_Y * 100;
+		fract->xmin = xmin + xmin * (xmax - xmin) / SIDE_X * 200;
+		fract->ymin = ymin + ymin * (ymax - ymin) / SIDE_Y * 200;
+		fract->xmax = xmax + xmax * (xmax - xmin) / SIDE_X * 200;
+		fract->ymax = ymax + ymax * (ymax - ymin) / SIDE_Y * 200;
+		fract->x -= (double)(750.0 - x) / 4;
+		fract->y -= (double)(500.0 - y) / 4;
 	}
 	mouse_press_0(button, x, y, fract);
 	mouse_press_1(button, x, y, fract);

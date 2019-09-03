@@ -93,9 +93,7 @@ __kernel void vadd( __global int *arr, int side_x, int side_y, double move_x, do
             i++;
         }
     }
-    if (color == 0 && i != repeat)
-        arr[dot] = 0xFFFFFF;
-    else if (color == 0xFFFFFF || color == 0x00FFFF || color == 0x0000CD)
+    if (color == 0xFFFFFF || color == 0x00FFFF || color == 0x0000CD)
     {
         t = (double)i / (double)repeat;
         red = (color & 0xFF0000) >> 16;

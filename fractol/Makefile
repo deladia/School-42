@@ -6,7 +6,7 @@
 #    By: deladia <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/09/01 23:52:27 by deladia           #+#    #+#              #
-#    Updated: 2019/09/01 23:52:55 by deladia          ###   ########.fr        #
+#    Updated: 2019/09/03 20:30:30 by deladia          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,7 @@ MY_LIB = ./libft/
 
 INCLUDES = -I /usr/local/include -I ./libft/include
 
-SRC = main.c create_cl.c mouse_control.c helps.c errors.c
+SRC = main.c set_default.c create_cl.c mouse_control.c helps.c errors.c put_str_on_win.c key_control.c
 
 OBJ = $(SRC:.c=.o)
 

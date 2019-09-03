@@ -80,5 +80,9 @@ void					fractol_free(t_fractol **fract);
 int						*clear_array(t_fractol *fract);
 int						mouse_press(int button, int x, int y, t_fractol *fract);
 int						mouse_move(int x, int y, t_fractol *fract);
+int						set_default(t_fractol *fract);
+int						set_fractol(t_fractol *fract);
+int						put_str_on_win(t_fractol *fract);
+int						key_press(int keycode, t_fractol *fract);
 
 #endif
