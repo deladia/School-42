@@ -5,14 +5,12 @@
 #                                                     +:+ +:+         +:+      #
 #    By: deladia <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2019/06/12 14:55:00 by deladia           #+#    #+#              #
-#    Updated: 2019/06/12 14:55:58 by deladia          ###   ########.fr        #
+#    Created: 2019/04/02 17:37:59 by deladia           #+#    #+#              #
+#    Updated: 2019/04/14 16:15:27 by deladia          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = libft.a
-
-INCLUDES = libft.h
 
 SRC = ft_memalloc.c ft_putendl.c ft_strcpy.c ft_strmapi.c ft_strsub.c \
 	  ft_memccpy.c ft_putendl_fd.c ft_strdel.c ft_strncat.c ft_strtrim.c \
@@ -25,25 +23,32 @@ SRC = ft_memalloc.c ft_putendl.c ft_strcpy.c ft_strmapi.c ft_strsub.c \
 	  ft_strsplit.c ft_itoa.c ft_putchar_fd.c ft_strcmp.c ft_strmap.c ft_strstr.c \
 	  ft_lstnew.c ft_lstdelone.c ft_lstdel.c ft_lstadd.c ft_lstiter.c ft_lstmap.c \
 	  ft_iterative_power.c ft_sqrt.c ft_is_negative.c ft_iterative_factorial.c \
-	  ft_range.c get_next_line.c
+	  ft_range.c
 
-OBJECTS = $(SRC:.c=.o)
+OFI = ft_memalloc.o ft_putendl.o ft_strcpy.o ft_strmapi.o ft_strsub.o \
+	  ft_memccpy.o ft_putendl_fd.o ft_strdel.o ft_strncat.o ft_strtrim.o \
+	  ft_atoi.o ft_memchr.o ft_putnbr.o ft_strdup.o ft_strncmp.o ft_tolower.o \
+	  ft_bzero.o ft_memcmp.o ft_putnbr_fd.o ft_strequ.o ft_strncpy.o ft_toupper.o \
+	  ft_isalnum.o ft_memcpy.o ft_putstr.o ft_striter.o ft_strnequ.o ft_isalpha.o \
+	  ft_memdel.o ft_putstr_fd.o ft_striteri.o ft_strnew.o ft_isascii.o ft_memmove.o \
+	  ft_strcat.o ft_strjoin.o ft_strnstr.o ft_isdigit.o ft_memset.o ft_strchr.o \
+	  ft_strlcat.o ft_strrchr.o ft_isprint.o ft_putchar.o ft_strclr.o ft_strlen.o \
+	  ft_strsplit.o ft_itoa.o ft_putchar_fd.o ft_strcmp.o ft_strmap.o ft_strstr.o \
+	  ft_lstnew.o ft_lstdelone.o ft_lstdel.o ft_lstadd.o ft_lstiter.o ft_lstmap.o \
+	  ft_iterative_power.o ft_sqrt.o ft_is_negative.o ft_iterative_factorial.o \
+	  ft_range.o
 
 all: $(NAME)
 
-$(NAME): $(OBJECTS)
-	@ar rc $(NAME) $(OBJECTS)
-	@ranlib $(NAME)
-
-%.o: %.c $(INCLUDES)
-	gcc -Wall -Wextra -Werror -c $<
-
-.PHONY: clean fclean re
+$(NAME):
+	gcc -Wall -Wextra -Werror -I libft.h -c $(SRC)
+	ar rc $(NAME) $(OFI)
+	ranlib $(NAME)
 
 clean:
-	@/bin/rm -f $(OBJECTS)
+	rm -f $(OFI)
 
-fclean:	clean
-	@/bin/rm -f $(NAME)
+fclean: clean
+	rm -f $(NAME)
 
-re:	fclean all
+re: fclean all
