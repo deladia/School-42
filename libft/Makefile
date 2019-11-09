@@ -6,14 +6,17 @@
 #    By: deladia <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/06/12 14:55:00 by deladia           #+#    #+#              #
-#    Updated: 2019/06/12 14:55:58 by deladia          ###   ########.fr        #
+#    Updated: 2019/11/09 19:00:51 by deladia          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = libft.a
+
 INC = -I ./includes
+INC_FILE = ./includes/libft.h ./includes/get_next_line.h
 SRC_DIR = src
 OBJ_DIR = object
+
 SRC = ft_memalloc.c ft_putendl.c ft_strcpy.c ft_strmapi.c ft_strsub.c \
 	ft_memccpy.c ft_putendl_fd.c ft_strdel.c ft_strncat.c ft_strtrim.c \
 	ft_atoi.c ft_memchr.c ft_putnbr.c ft_strdup.c ft_strncmp.c ft_tolower.c \
@@ -26,26 +29,26 @@ SRC = ft_memalloc.c ft_putendl.c ft_strcpy.c ft_strmapi.c ft_strsub.c \
 	ft_lstnew.c ft_lstdelone.c ft_lstdel.c ft_lstadd.c ft_lstiter.c ft_lstmap.c \
 	ft_iterative_power.c ft_sqrt.c ft_is_negative.c ft_iterative_factorial.c \
 	ft_range.c get_next_line.c ft_atof.c
-FLAGS = -Wall -Wextra -Werror
-OBJ = $(addprefix $(OBJ_DIR)/, $(SRC:.c=.o))
 
-$(NAME): cr_obj_dir $(OBJ_DIR) $(OBJ) 
-		ar rc $(NAME) $(OBJ)
-		ranlib $(NAME)
+FLAGS = -Wall -Wextra -Werror
+
+OBJ = $(addprefix $(OBJ_DIR)/, $(SRC:.c=.o))
 
 all: $(NAME)
 
-$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
-		@$(CC) $(FLAG) $(INC) -c $^ -o $@
+$(NAME): $(OBJ)
+		ar rc $(NAME) $(OBJ)
+		ranlib $(NAME)
 
-cr_obj_dir:
-		mkdir -p $(OBJ_DIR)
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(INC_FILE)
+		@mkdir -p $(OBJ_DIR)
+		$(CC) $(FLAG) $(INC) -c $< -o $@
 
 clean:
-		rm -rf $(OBJ_DIR)
+		@/bin/rm -rf $(OBJ_DIR)
 		
 fclean: clean
-		rm -f $(OBJ)
-		rm -f $(NAME)
+		@/bin/rm -f $(OBJ)
+		@/bin/rm -f $(NAME)
 
 re: fclean $(NAME)
