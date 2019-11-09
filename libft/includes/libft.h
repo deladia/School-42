@@ -6,7 +6,7 @@
 /*   By: deladia <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/19 14:07:53 by deladia           #+#    #+#             */
-/*   Updated: 2019/04/19 14:10:29 by deladia          ###   ########.fr       */
+/*   Updated: 2019/07/11 19:34:56 by deladia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <string.h>
+# include "get_next_line.h"
 
 typedef struct		s_list
 {
@@ -87,5 +88,6 @@ int					ft_sqrt(int nb);
 void				ft_is_negative(int n);
 int					ft_iterative_factorial(int nb);
 int					*ft_range(int min, int max);
+double				ft_atof(char *s);
 
 #endif
